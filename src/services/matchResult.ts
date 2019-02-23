@@ -1,13 +1,13 @@
 export class MatchResult {
     public Country: string;
     public League : string;
-    // "Season": 2012,
-    // "Date": "3/10/2012",
-    // "Time": "23:00",
-    // "Home": "Colorado Rapids",
-    // "Away": "Columbus Crew",
-    // "HG": 2,
-    // "AG": 0,
-    // "Res": "H"
+    public Season : number;
+    public Date: Date;
+    public Time: string;
+    public Home:  string;
+    public Away:string;
+    public HG : number;
+    public AG: number;
+    public Res: string; 
 
 }
