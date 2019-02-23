@@ -3,7 +3,14 @@
     <option *ngFor="let team of teams">{{team}}</option>
 </select>
 <h3>Team 2</h3>
-<ul>
+<!-- <ul>
     <li *ngFor="let matchResult of matchData">{{matchResult.Home}} {{matchResult.Away}}</li>
-</ul>
+</ul> -->
 
+<ag-grid-angular 
+    style="width: 500px; height: 500px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    >
+</ag-grid-angular>

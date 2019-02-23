@@ -1,0 +1,5 @@
+ body {background-color: grey; background-image: url("/assets/images/IMG_7137.JPG")}
+  $ag-icons-path: "../node_modules/ag-grid-community/src/styles/ag-theme-balham/icons/";
+
+  @import "../node_modules/ag-grid-community/src/styles/ag-grid.scss";
+  @import "../node_modules/ag-grid-community/src/styles/ag-theme-balham/sass/ag-theme-balham.scss";
