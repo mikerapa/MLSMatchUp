@@ -1,14 +1,24 @@
-<h3>Team 1</h3>
-<select>
-    <option *ngFor="let team of teams">{{team}}</option>
-</select>
-<h3>Team 2</h3>
-<!-- <ul>
-    <li *ngFor="let matchResult of matchData">{{matchResult.Home}} {{matchResult.Away}}</li>
-</ul> -->
 
+<ul class="teams">
+    <li *ngFor="let team of teams" [value]="team" (click)="teamFilterSelection(team)"
+    [class.selected]="selectedTeams[team]"
+    >{{team}}</li>
+</ul>
+
+<!-- <h3>Team 1</h3>
+<select [(ngModel)]="filterTeam1Name" (change)="filterChanged($event.target.value)">
+    <option value="0">Select Team</option>
+    <option *ngFor="let team of teams" [value]="team">{{team}}</option>
+</select> -->
+<!-- <h3>Team 2</h3>
+<select [(value)]="filterTeam2Name">
+    <option *ngFor="let team of teams">{{team}}</option>
+</select> -->
+
+Filters: {{filterTeam1Name}} {{filterTeam2Name}}
+<hr>
 <ag-grid-angular 
-    style="width: 500px; height: 500px;" 
+    style="width: 80%; height: 500px;" 
     class="ag-theme-balham"
     [rowData]="rowData" 
     [columnDefs]="columnDefs"
