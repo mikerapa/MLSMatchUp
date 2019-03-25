@@ -6,25 +6,30 @@
   }
 
   .selected {
-    background-color: #CFD8DC !important;
-    color: white;
+    background-color: rgb(31, 136, 182) !important;
+    color: rgb(14, 0, 0);
   }
   .teams {
+    // display: inline-block;
+     display: inline;
     margin: 0 0 2em 0;
     list-style-type: none;
     padding: 0;
     width: 15em;
   }
-  
+
   .teams li {
     cursor: pointer;
     position: relative;
     left: 0;
     background-color: #EEE;
-    margin: .5em;
-    padding: .3em 0;
+    margin: .25em;
+    padding: .3em 10;
     height: 1.6em;
     border-radius: 4px;
+    list-style: none;
+    //display: inline-block;
+    display: inline;
   }
   // $ag-icons-path: "../node_modules/ag-grid-community/src/styles/ag-theme-balham/icons/";
 

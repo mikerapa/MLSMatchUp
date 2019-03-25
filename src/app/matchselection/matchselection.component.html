@@ -1,6 +1,7 @@
 
 <ul class="teams">
     <li *ngFor="let team of teams" [value]="team" (click)="teamFilterSelection(team)"
+    class="teams.li"
     [class.selected]="selectedTeams[team]"
     >{{team}}</li>
 </ul>
@@ -20,7 +21,7 @@ Filters: {{filterTeam1Name}} {{filterTeam2Name}}
 <ag-grid-angular 
     style="width: 80%; height: 500px;" 
     class="ag-theme-balham"
-    [rowData]="rowData" 
+    [rowData]="getRowData()" 
     [columnDefs]="columnDefs"
     >
 </ag-grid-angular>

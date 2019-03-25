@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatchDataService } from 'src/services/matchdataservice';
 import { MatchResult } from 'src/services/matchResult';
+import {map, filter, catchError} from 'rxjs/operators';
 
 
 @Component({
@@ -11,22 +12,19 @@ import { MatchResult } from 'src/services/matchResult';
 export class MatchSelectionComponent implements OnInit {
     constructor(private matchDataService: MatchDataService) { }
     public teams : string[];
-    public filterTeam1Name : string;
-    public filterTeam2Name: string;
     public selectedTeams: {[teamName: string] : boolean} = {};
+    public rowData : MatchResult[];
 
-    //public matchData: MatchResult[];
 
     columnDefs = [
         {headerName: 'Date', field: 'Date', sortable: true, sort: 'desc', comparator: this.dateComparison},
-        // {headerName: 'Home Team', field: 'Home' },
-        // {headerName: 'Away Team', field: 'Away' },
-        {headerName: 'Result', field: 'ResultString', resizable: true, width: '350'}
+
+        {headerName: 'Result', field: 'ResultString', resizable: true, width: 350}
 
     ];
 
 
-    public rowData : MatchResult[];
+    
 
     ngOnInit(): void { 
         this.matchDataService.getTeamNames().subscribe(tn=>this.teams=tn);
@@ -38,6 +36,14 @@ export class MatchSelectionComponent implements OnInit {
 
     }
 
+    public getRowData(){
+        //return this.rowData;
+        if (this.rowData){
+            //console.log("getRowData");
+            return this.rowData.filter(mr=>this.selectedTeams[mr.Home] || this.selectedTeams[mr.Away]);
+        }
+    }
+
     public dateComparison(date1string:string, date2string:string){
         let date1 : Date = new Date(date1string);
         let date2 : Date = new Date(date2string);
@@ -45,18 +51,12 @@ export class MatchSelectionComponent implements OnInit {
     }    
 
     public teamFilterSelection(teamName: string){
-        if (this.selectedTeams[teamName]) {
-            this.selectedTeams[teamName] = false;
-        }
-        else {this.selectedTeams[teamName] = true;}
+        this.selectedTeams[teamName] = (!this.selectedTeams[teamName])
         console.log(teamName, this.selectedTeams[teamName])
-        console.log("got to teamFilterSelection", teamName);
     }
 
     public filterChanged(changedValue: any){
         console.log("changedValue", changedValue);
-        console.log(this.filterTeam1Name);
-
     }
 
 }
