@@ -14,6 +14,7 @@ export class MatchSelectionComponent implements OnInit {
     public teams : string[];
     public selectedTeams: {[teamName: string] : boolean} = {};
     public rowData : MatchResult[];
+    public fullMatchData : MatchResult[];
 
 
     columnDefs = [
@@ -24,8 +25,6 @@ export class MatchSelectionComponent implements OnInit {
     ];
 
 
-    
-
     ngOnInit(): void { 
         this.matchDataService.getTeamNames().subscribe(tn=>this.teams=tn);
 
@@ -33,16 +32,9 @@ export class MatchSelectionComponent implements OnInit {
             mr.ResultString = `${mr.Home} ${mr.HG}- ${mr.AG} ${mr.Away}`;
             return mr;
         }));
-
+        
     }
 
-    public getRowData(){
-        //return this.rowData;
-        if (this.rowData){
-            //console.log("getRowData");
-            return this.rowData.filter(mr=>this.selectedTeams[mr.Home] || this.selectedTeams[mr.Away]);
-        }
-    }
 
     public dateComparison(date1string:string, date2string:string){
         let date1 : Date = new Date(date1string);
@@ -53,6 +45,11 @@ export class MatchSelectionComponent implements OnInit {
     public teamFilterSelection(teamName: string){
         this.selectedTeams[teamName] = (!this.selectedTeams[teamName])
         console.log(teamName, this.selectedTeams[teamName])
+        if(!this.fullMatchData){
+            console.log("Setting fullMatchData");
+            this.fullMatchData = this.rowData;
+        }
+        this.rowData = this.fullMatchData.filter(mr=>this.selectedTeams[mr.Home] || this.selectedTeams[mr.Away]);
     }
 
     public filterChanged(changedValue: any){
